@@ -117,9 +117,10 @@ if __name__ == "__main__":
     os.mkdir(f'{opt.output}blueprints')
     for bp in blueprints:
         blueprint = bp["blueprint"]
-        with open(f'{opt.output}blueprints/{blueprint["label"]}.json', 'w') as f:
+        blueprint_file_name = "".join(c for c in blueprint["label"] if c.isalnum() or c in "-_")
+        with open(f'{opt.output}blueprints/{blueprint_file_name}.json', 'w') as f:
             json.dump(bp, f)
-        with open(f'{opt.output}blueprints/{blueprint["label"]}', 'w') as f:
+        with open(f'{opt.output}blueprints/{blueprint_file_name}', 'w') as f:
             f.write(encode(bp))
 
     verbose(f"Saved blueprints at {opt.output}blueprints")
